@@ -12,7 +12,7 @@
 		<div class="col-md-12 mt-5">
 		<br/>
 		
-		<p>Search for Men Category</p>
+		<p>Search by Category</p>
 			<nav>
 				<ul class="pagination">
 					<li class="page-item">

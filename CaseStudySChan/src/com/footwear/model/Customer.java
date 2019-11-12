@@ -1,13 +1,16 @@
 package com.footwear.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -18,64 +21,80 @@ public class Customer {
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
 	private int custcode;
 	
-	@NotEmpty(message = "required, cannot be empty")
 	@Column (name ="CUSTOMER_NAME", nullable = false)
-	private String custName;
-	
 	@NotEmpty(message = "required, cannot be empty")
+	private String custname;
+	
 	@Column (name ="CUSTOMER_CONTACT", nullable = false)
+	@NotEmpty(message = "required, cannot be empty")
 	private String contact;
 	
-	@NotEmpty(message = "required, cannot be empty")
 	@Column (name ="EMAIL" , nullable = false)
+	@NotEmpty(message = "required, cannot be empty")
 	private String email;
 	
-	@NotEmpty(message = "required, cannot be empty")
 	@Column (name ="PHONE", nullable = false)
+	@NotEmpty(message = "required, cannot be empty")
 	private String phone;
 	
-	@OneToMany(mappedBy ="customer")
-	private Set<Address> address;
+	@OneToOne(mappedBy ="customer" , cascade = CascadeType.ALL)
+	private Address address;
 	
-	@OneToMany (mappedBy="customer")
-	private Set<Orders> order;
+	@OneToMany (mappedBy="customer", cascade = CascadeType.ALL)
+	private Set<Orders> orders = new HashSet<Orders>();
 	
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
 	private Set<User> user;
 	
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer" , cascade = CascadeType.ALL)
 	private Set<CreditCardInfo> cardinfo;
 	
 	public Customer() {}
+
 	
-	public Customer( String custName, String contact, String email, String phone, Set<Address> address,
-			Set<Orders> order, Set<User> user, Set<CreditCardInfo> cardinfo) {
+	
+	
+
+
+
+
+	public Customer(int custcode,  String custname,String contact,String email,String phone, Address address, Set<Orders> orders,
+			Set<User> user, Set<CreditCardInfo> cardinfo) {
 		super();
-	//	this.custCode = custCode;
-		this.custName = custName;
+		this.custcode = custcode;
+		this.custname = custname;
 		this.contact = contact;
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
-		this.order = order;
+		this.orders = orders;
 		this.user = user;
 		this.cardinfo = cardinfo;
+	}
+
+
+	public boolean addOrders(Orders o) {
+		o.setCustomer(this);
+		return orders.add(o);
 	}
 
 	public int getCustcode() {
 		return custcode;
 	}
 
+
 	public void setCustcode(int custcode) {
 		this.custcode = custcode;
 	}
 
-	public String getCustName() {
-		return custName;
+
+
+	public String getCustname() {
+		return custname;
 	}
 
-	public void setCustName(String custName) {
-		this.custName = custName;
+	public void setCustname(String custname) {
+		this.custname = custname;
 	}
 
 	public String getContact() {
@@ -102,20 +121,20 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	public Set<Address> getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(Set<Address> address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
-	public Set<Orders> getOrder() {
-		return order;
+	public Set<Orders> getOrders() {
+		return orders;
 	}
 
-	public void setOrder(Set<Orders> order) {
-		this.order = order;
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
 	}
 
 	public Set<User> getUser() {
@@ -133,6 +152,6 @@ public class Customer {
 	public void setCardinfo(Set<CreditCardInfo> cardinfo) {
 		this.cardinfo = cardinfo;
 	}
-
-
+	
+	
 }

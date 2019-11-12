@@ -17,9 +17,9 @@
 					<td><form:errors path="custcode" cssClass="error"/> </td>
 				</tr>
 				<tr>
-					<td><form:label path="custName" />Customer Name: </td>
-					<td><form:input path="custName" name="custName" id="custName" size="50"/> </td>
-					<td><form:errors path="custName" cssClass="error"/> </td>
+					<td><form:label path="custname" />Customer Name: </td>
+					<td><form:input path="custname" name="custname" id="custname" size="50"/> </td>
+					<td><form:errors path="custname" cssClass="error"/> </td>
 				</tr>
 				<tr>
 					<td><form:label path="contact" />Contact Name: </td>
@@ -42,7 +42,7 @@
 				
 				</tr>
 			</table>
-			<input type ="submit" name="confirm" value="Confirm"/>
+			<input type ="submit" name="confirm" value="Save"/>
 			<input type ="submit" name="cancel" value="Cancel"/>
 		</form:form>
 	</div>

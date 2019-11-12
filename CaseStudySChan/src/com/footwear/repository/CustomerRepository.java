@@ -8,5 +8,8 @@ import com.footwear.model.Customer;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+
+	Customer findByCustname(String custname);
 	
+
 }

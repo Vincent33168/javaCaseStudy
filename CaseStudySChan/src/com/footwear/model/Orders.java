@@ -53,7 +53,7 @@ public class Orders {
 	@JoinColumn(name="CUSTCODE_FK")
 	private Customer customer;
 	
-	@OneToMany (mappedBy="orders", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany (mappedBy="orders", cascade={CascadeType.PERSIST,CascadeType.REMOVE, CascadeType.MERGE}, fetch=FetchType.LAZY)
 	private Set<OrderDetail> odetail = new HashSet<OrderDetail>();
 	
 	
@@ -82,6 +82,16 @@ public class Orders {
 		this.odetail = odetail;
 	}
 
+	
+	public boolean addOrderDetail(OrderDetail od) {
+		od.setOrders(this);
+		return odetail.add(od);
+	}
+	
+	public boolean removeOrderDetail(OrderDetail od) {
+		od.setOrders(null);
+		return odetail.remove(od);
+	}
 
 	public int getId() {
 		return id;
@@ -231,14 +241,6 @@ public class Orders {
 	public void setOdetail(Set<OrderDetail> odetail) {
 		this.odetail = odetail;
 	}
-	
-	
-
-
-	
-	
-	
-	
 	
 	
 }

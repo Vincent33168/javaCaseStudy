@@ -35,7 +35,7 @@ public class OrderDetail {
 	@Column (name ="PHOTO")
 	private String photo;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch=FetchType.LAZY)
 	@JoinColumn(name="ORDER_ID_FK")
 	private Orders orders;
 	

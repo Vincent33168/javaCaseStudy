@@ -1,29 +1,21 @@
 package com.footwear.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.footwear.model.Item;
 import com.footwear.model.ItemDetail;
-import com.footwear.model.OrderDetail;
-import com.footwear.model.Orders;
 import com.footwear.service.ItemService;
 import com.footwear.service.OrdersService;
 
@@ -45,6 +37,7 @@ public class ProductController {
 
 		//for test
 		//addTestData();
+		
 		System.out.println(category + "|"+ subcategory+"|");
 		if (category!=null && subcategory!=null) {
 			itemList = itemService.findByCategoryAndSubcategory(category, subcategory);
@@ -83,65 +76,10 @@ public class ProductController {
         
 	}
 	
-	@RequestMapping(value="/addToCart/{selectedItem}",method = RequestMethod.POST)
-	public ModelAndView addItemToCart(@ModelAttribute("CartObj") Item item,
-			BindingResult br,  @PathVariable int selectedItem,
-			@RequestParam(value = "quantity") int qty,
-			@RequestParam(value = "color") String color,
-			@RequestParam(value = "size") String size,
-			RedirectAttributes redirect) {
-		
-			System.out.println(qty+"|"+color+"|"+size);
-			
-			ModelAndView mav;
-			if(br.hasErrors()) {
-				System.out.println(br.getErrorCount());
-			}
-			//check if order qty is zero and return to cartList with error message
-			if (qty==0) {
-				mav = new ModelAndView("buyItemForm");
-				mav.addObject("SELECTEDITEM", itemService.getItem(selectedItem));
-				mav.addObject("message", "Quantity cannot be zero!");
-				return mav;
-			}
-			
-			//create the order object
-			Item item2 = itemService.getItem(selectedItem);
-			Orders neworder = new Orders();
-			OrderDetail ordersDetail = new OrderDetail();
-			ordersDetail.setName(item2.getName());
-			ordersDetail.setDesc(item2.getDesc());
-			ordersDetail.setColor(color);
-			ordersDetail.setSize(size);
-			ordersDetail.setQuantity(qty);
-			ordersDetail.setUnitprice(item2.getUnitprice());
-			//ordersDetail.setOrders(orders);
-			Set<OrderDetail> od = new HashSet<>();
-			od.add(ordersDetail);
-			
-			//check login user
-			//neworder.setCustomer();
-			neworder.setCurrency(item2.getCurrency());
-			neworder.setAmount(qty*item2.getUnitprice());
-			neworder.setOdate(new Date());
-			neworder.setStatus("Unconfirm");
-			double tax = qty*item2.getUnitprice() * 8.875/100;
-			neworder.setTax(tax);
-			neworder.setOrderTotal(qty*item2.getUnitprice()+tax);
-			
-			neworder.setOdetail(od);
-			//check if this item already ordered or not
-			//if in cart, add qty. Otherwise add new item to cart
-			orderService.addOrders(neworder);
-			
-//			mav = new ModelAndView("viewCart");
-			
-//			mav.addObject("CARTLIST", itemService.getItem(selectedItem));
-//		    redirect.addFlashAttribute("message", "Product successfully added to Cart"); 
-		    mav = new ModelAndView("redirect:/cartlist");
-//		    mav.addObject("ITEMLIST",itemList);
-			
-			return mav;
+	@RequestMapping(value = "/inventory",  method = RequestMethod.GET)
+	public ModelAndView updateInventory() {
+		ModelAndView mav = new ModelAndView("comingSoon");
+		return mav;
 	}
 	
 	//helper method to create some test data for testing

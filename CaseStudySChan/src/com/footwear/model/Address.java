@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -18,74 +18,97 @@ public class Address {
 	private int id;
 	
 	@NotEmpty(message = "required, cannot be empty")
-	@Column (name ="ADDRESS_TYPE" , nullable = false)
-	private String type;
-	
-	@NotEmpty(message = "required, cannot be empty")
 	@Column (name ="ADDRESS" , nullable = false)
 	private String address;
-	
-	@NotEmpty(message = "required, cannot be empty")
-	@Column (name ="ZIPCODE" , nullable = false)
-	private String zipcode;
 	
 	@NotEmpty(message = "required, cannot be empty")
 	@Column (name ="COUNTRY" , nullable = false)
 	private String country;
 	
-	@ManyToOne
+	@NotEmpty(message = "required, cannot be empty")
+	@Column (name ="STATE" , nullable = false)
+	private String state;
+	
+	@NotEmpty(message = "required, cannot be empty")
+	@Column (name ="ZIPCODE" , nullable = false)
+	private String zipcode;
+	
+	@Column (name ="SHIP_TO_ADDRESS")
+	private boolean shipaddress;
+	
+	@OneToOne
 	@JoinColumn(name="CUSTCODE_FK")
 	private Customer customer;
 
 	public Address() {
 		
 	}
-	public Address(int id, String type, String address, String zipcode, String country, Customer customer) {
+
+	public Address(String address,String country,String state,String zipcode, boolean shipaddress, Customer customer) {
 		super();
-		this.id = id;
-		this.type = type;
 		this.address = address;
-		this.zipcode = zipcode;
 		this.country = country;
+		this.state = state;
+		this.zipcode = zipcode;
+		this.shipaddress = shipaddress;
 		this.customer = customer;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getZipcode() {
-		return zipcode;
-	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
+
 	public String getCountry() {
 		return country;
 	}
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public boolean isShipaddress() {
+		return shipaddress;
+	}
+
+	public void setShipaddress(boolean shipaddress) {
+		this.shipaddress = shipaddress;
+	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
 	
 	
 	

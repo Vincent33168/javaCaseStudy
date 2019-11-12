@@ -12,7 +12,7 @@
 	</form>
 		${message}
 		<table class="table table-bordered table-sm table-hover">
-			<thead>
+			<thead class="table-info">
 				<tr>
 					<th>#</th>
 					<th>Customer Name</th>
@@ -26,13 +26,13 @@
 			<c:forEach items="${CUSTOMERLIST}" var="customer">
 				<tr>
 					<td>${customer.custcode}</td>
-					<td>${customer.custName}</td>
+					<td>${customer.custname}</td>
 					<td>${customer.contact}</td>
 					<td>${customer.email}</td>
 					<td>${customer.phone}</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/edit/${customer.custcode}/"><input type="button" value="EDIT"></a>
-						<a href="${pageContext.request.contextPath}/delete/${customer.custcode}/"><input type="button" value="DELETE"></a>
+						<a href="${pageContext.request.contextPath}/editcustomer/${customer.custcode}/"><input type="button" value="EDIT"></a>
+						<a href="${pageContext.request.contextPath}/deletecustomer/${customer.custcode}/"><input type="button" value="DELETE"></a>
 					</td>
 				</tr>
 			</c:forEach>

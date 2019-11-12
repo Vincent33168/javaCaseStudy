@@ -93,28 +93,6 @@
 						</dl>
 					</div>
 					
-					<!-- 3rd item -->
-						
-					<div class="col-md-4">
-
-						<img src="${pageContext.request.contextPath}/resources/photo/ANCHOR02.jpg"
-							class="card-img-top border border-primary" alt="...">
-					</div>
-					<div class="col-md-6">
-						<dl class="_w">
-						  <dd>Pure High-Top WC WNT</dd>
-						  <dd>Color : Black/Olive</dd>
-						  <dd>Size : A</dd>
-						 <dd>Quantity : 3<span> <button type="button" class="btn btn-sm btn-primary">Remove</button> </span></dd>
-						</dl>
-						  					
-
-					</div>
-					<div class="col-md-2">
-						<dl class="_w">
-						<dt>US$180.00</dt>
-						</dl>
-					</div>
 					
 					
 					
@@ -184,7 +162,7 @@
 					<span class="navbar-toggler-icon"></span>
 
 				<!-- Home button -->
-				</button> <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><i class="fa fa-home"  style="font-size:25px;"></i>J&F Footwear </a>
+				</button> <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><i class="fa fa-home"  style="font-size:25px;">${cartItem }</i>J&F Footwear </a>
 				
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="navbar-nav">
@@ -193,11 +171,11 @@
 						<li class="nav-item dropdown active ">
 							 <a class="nav-link dropdown-toggle" href="MEN" id="navbarDropdownMenuLink" data-toggle="dropdown">Men<span class="sr-only">(current)</span></a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								 <a class="dropdown-item" href="product?cat=MEN&subcat=CASUAL">Casual Shoes</a> 
-								 <a class="dropdown-item" href="product?cat=MEN&subcat=DRESS">Dress Shoes</a> 
-								 <a class="dropdown-item" href="product?cat=MEN&subcat=BOOTS">Boots</a>
-								 <a class="dropdown-item" href="product?cat=MEN&subcat=SANDALS">Sandals</a>
-								  <a class="dropdown-item" href="product?cat=MEN&subcat=SLIPPERS">Slippers</a>
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=MEN&subcat=CASUAL">Casual Shoes</a> 
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=MEN&subcat=DRESS">Dress Shoes</a> 
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=MEN&subcat=BOOTS">Boots</a>
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=MEN&subcat=SANDALS">Sandals</a>
+								  <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=MEN&subcat=SLIPPERS">Slippers</a>
 								
 							</div>
 						</li>
@@ -206,11 +184,11 @@
 						<li class="nav-item dropdown active">
 							 <a class="nav-link dropdown-toggle" href="WOMEN" id="navbarDropdownMenuLink" data-toggle="dropdown">Women</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								 <a class="dropdown-item" href="product?cat=WOMEN&subcat=CASUAL">Casual Shoes</a> 
-								 <a class="dropdown-item" href="product?cat=WOMEN&subcat=DRESS">Dress Shoes</a> 
-								 <a class="dropdown-item" href="product?cat=WOMEN&subcat=BOOT">Boots</a>
-								 <a class="dropdown-item" href="product?cat=WOMEN&subcat=SANDALS">Sandals</a>
-								  <a class="dropdown-item" href="product?cat=WOMEN&subcat=SLIPPERS">Slippers</a>
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=WOMEN&subcat=CASUAL">Casual Shoes</a> 
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=WOMEN&subcat=DRESS">Dress Shoes</a> 
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=WOMEN&subcat=BOOT">Boots</a>
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=WOMEN&subcat=SANDALS">Sandals</a>
+								  <a class="dropdown-item" href="${pageContext.request.contextPath}/product?cat=WOMEN&subcat=SLIPPERS">Slippers</a>
 								
 							</div>
 						</li>
@@ -218,12 +196,12 @@
 						
 						<!-- Contact us botton -->
 						<li class="nav-item">
-							 <a class="nav-link active" href="contactus">Contact Us</a>
+							 <a class="nav-link active" href="${pageContext.request.contextPath}/contactUs">Contact Us</a>
 						</li>
 
 						<!-- About us botton -->
 						<li class="nav-item">
-							 <a class="nav-link active" href="aboutus">About Us</a>
+							 <a class="nav-link active" href="${pageContext.request.contextPath}/aboutUs">About Us</a>
 						</li>
 
 						<!-- Admin functions  -->
@@ -232,9 +210,9 @@
 							<li class="nav-item dropdown active">
 								<a class="nav-link dropdown-toggle" href="admin" id="navbarDropdownMenuLink" data-toggle="dropdown">Admin</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								 <a class="dropdown-item" href="customer">Customer Maintenance</a> 
-								  <a class="dropdown-item" href="users">User Maintenance</a> 
-								 <a class="dropdown-item" href="inventory">Update Inventory</a> 
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/customer">Customer Maintenance</a> 
+								  <a class="dropdown-item" href="${pageContext.request.contextPath}/users">User Maintenance</a> 
+								 <a class="dropdown-item" href="${pageContext.request.contextPath}/inventory">Update Inventory</a> 
 								</div>
 							</li>
 								
@@ -246,14 +224,23 @@
 
 					<ul class="nav ml-md-auto">
 					
-
+						<c:if test="${pageContext.request.userPrincipal.name!=null}"> 
+						
+						<!-- View My Order  -->
+						<li class="nav-item ">
+							 <a class="nav-link" href="${pageContext.request.contextPath}/orderHistory">Orders</a>
+						</li>
+						
 						<!-- Shopping Cart button -->
-						<li class="nav-item cartbutton" id="cart-btn">
-							 <a class="nav-link" href="#"><i class="fa fa-shopping-cart" style="font-size:25px;"></i> 
-							 
-							 <span class="sr-only"></span><span class="badge badge-primary badge-pill">2</span></a>
+						<!-- 	<li class="nav-item cartbutton" id="cart-btn"> -->
+						<li class="nav-item cartbutton">
+							 <a class="nav-link" href="${pageContext.request.contextPath}/cartlist">Cart<i class="fa fa-shopping-cart" style="font-size:25px;"></i> 
+						
+							  <span class="sr-only"></span><span class="badge badge-primary badge-pill"></span></a> 
 							
 						</li>
+						
+						</c:if>
 
 						<!-- Logout button -->
 						<c:if test="${pageContext.request.userPrincipal.name!=null}">  

@@ -6,6 +6,7 @@
 
 <jsp:include page="header.jsp" />
 
+
 <div class="row">
 	<div class="col-md-12  mt-5">
 		<br/>
@@ -28,7 +29,7 @@
 				<h5>${SELECTEDITEM.currency}${SELECTEDITEM.unitprice} <span> 
 				(${SELECTEDITEM.currency}${SELECTEDITEM.unitprice*12} Per Case)</span></h5><br/>
 				
-				<form:form id="buyItemForm"  modelAttribute="CartObj"
+				<form:form id="buyItemForm"  name ="buyItemForm" modelAttribute="CartObj" 
 				action="${pageContext.request.contextPath}/addToCart/${SELECTEDITEM.id}"  method="POST">
 					<div class="form-group">
 						<label for="color"> COLOR </label> 
@@ -51,12 +52,13 @@
 					
 					<div class="form-group">
 						<label for="quantity">QUANTITY</label>
-   						 <input  type="text"  id="quantity" name="quantity"/>
-   						 ${message} 
+   						 <input  type="number"  id="quantity" name="quantity" size="4" min="1" max="1000"/>
+   						 
+   						 <p class="error">${message}</p> 
    						 
   					</div>
 
-					<button type="submit" class="btn btn-primary">ADD TO CART
+					<button type="submit"   class="btn btn-primary">ADD TO CART
 					</button>
 				</form:form>
 				<br/>
@@ -133,6 +135,7 @@
 		</div>
 	</div>
 </div>
+
 
 
 <jsp:include page="footer.jsp" />

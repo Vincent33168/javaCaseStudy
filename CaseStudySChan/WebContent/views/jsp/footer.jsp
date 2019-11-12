@@ -51,16 +51,14 @@ var cart = document.getElementById("cartbox");
 btn.addEventListener("click", myFunction);
 
 function myFunction(){
-	console.log("test");
 	if (cart.style.display =="inline-block") {
 		cart.style.display ="none";
-		cart.style.backgroud="green";}
 	else {
 		cart.style.display="inline-block";
-		cart.style.backgroud="yellow";
 	}
 	
 }
+
 
 </script>
 	

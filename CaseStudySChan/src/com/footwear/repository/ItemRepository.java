@@ -12,5 +12,4 @@ public interface ItemRepository extends CrudRepository<Item, Integer> {
 	
 	List<Item> findByCategoryAndSubcategory(String categroy, String subcategory);
 	
-	//boolean addItem(Item item);
 }

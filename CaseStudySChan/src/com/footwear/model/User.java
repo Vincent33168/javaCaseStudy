@@ -26,21 +26,21 @@ public class User {
 //	private int uId;
 	
 	@Id
-	@NotEmpty(message = "required, cannot be empty")
     @Email
     @Column(name = "username", nullable = false)
+	@NotEmpty(message = "required, cannot be empty")
 	private String username;
 
+	@Column(name = "FIRST_NAME",nullable = false)
 	@NotEmpty(message = "required, cannot be empty")
-	@Column(name = "FIRST_NAME")
 	private String fname;
 
+	@Column(name = "LAST_NAME",nullable = false)
 	@NotEmpty(message = "required, cannot be empty")
-	@Column(name = "LAST_NAME")
 	private String lname;
 
-	@NotEmpty(message = "required, cannot be empty")
-    @Column(name = "USER_PASSWORD")
+    @Column(name = "USER_PASSWORD",nullable = false)
+    @NotEmpty(message = "required, cannot be empty")
 	private String password;
 	
 	@Column(name = "enabled", nullable = false)
@@ -49,7 +49,7 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Authorities> authorities = new HashSet<>();
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "CUSTCODE_FK")
 	private Customer customer;
 

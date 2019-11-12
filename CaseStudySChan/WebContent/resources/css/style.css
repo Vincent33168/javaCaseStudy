@@ -44,3 +44,22 @@ dl {
 	color:red;
 	font-size: small;
 }
+
+.ordertable {
+	width:800px;
+	height:200px; 
+	overflow-x: hidden; 
+	overflow-y: auto;
+	
+}
+
+.outerbox{
+	box-sizing: border-box;
+	height: 100%; 
+	border:20px solid grey;
+
+}
+
+.innerbox{
+	padding: 15px;
+}

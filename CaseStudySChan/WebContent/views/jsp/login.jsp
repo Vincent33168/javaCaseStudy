@@ -4,19 +4,22 @@
 
 
 <!-- login page  -->
-
-	<div>
+<div class="row">
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-4">
 		
-		<div id="loginbox" style="margin-top: 50px;"
-			class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+		<div id="loginbox" class="justify-content-center" style="margin-top: 70px;">
+			<!-- class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2"> -->
 			
 			<div class="panel panel-info">
-
+				<p class="error">${message}</p>
 				<div class="panel-heading">
 					<div class="panel-title">Sign In</div>
+					
 				</div>
 
-				<div style="padding-top: 30px" class="panel-body">
+				<div style="padding-top: 20px" class="panel-body">
 
 					<!-- Login Form -->
 					<form:form action="${pageContext.request.contextPath}/authenticateTheUser" 
@@ -79,6 +82,10 @@
 
 	</div>
 	
+	<div class="col-md-4">
+	</div>
+</div>	
+
 <!--end of login page -->
 
 <jsp:include page="footer.jsp"/>

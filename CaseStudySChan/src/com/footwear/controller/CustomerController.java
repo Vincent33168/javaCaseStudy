@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.footwear.dao.CustomerServiceI;
 import com.footwear.model.Customer;
-import com.footwear.service.CustomerService;
 
 
 @Controller
 public class CustomerController {
 	@Autowired
-	CustomerService customerService;
+	CustomerServiceI customerService;
 	
 	ModelAndView mav;
 	
@@ -38,7 +38,7 @@ public class CustomerController {
 	public ModelAndView addCustomer() {
 		mav = new ModelAndView("customer_form");
 		mav.addObject("customerObj",new Customer());
-		mav.addObject("action","Add New Customer");
+		mav.addObject("message","Add New Customer");
 		return mav;
 	}
 	
@@ -76,7 +76,7 @@ public class CustomerController {
 				
 				
 	//Edit Customer
-    @RequestMapping(value = "/edit/{custcode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/editcustomer/{custcode}", method = RequestMethod.GET)
     public ModelAndView editCustomer(@PathVariable int custcode) {
     	ModelAndView mav = new ModelAndView("customer_form");
         Customer customer = customerService.getCustomer(custcode);
@@ -86,7 +86,7 @@ public class CustomerController {
     }
 
   	//Remove Customer from DB
-    @RequestMapping(value = "/delete/{custcode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deletecustomer/{custcode}", method = RequestMethod.GET)
     public ModelAndView deleteCustomer(@PathVariable int custcode,
     		RedirectAttributes redirect) {
         customerService.deleteCustomer(customerService.getCustomer(custcode));
